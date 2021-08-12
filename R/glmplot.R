@@ -40,13 +40,18 @@ glmplot <- function(fit,xvar,mode,colours=NULL){
   switch(xvar, #"norm","lambda","dev"
          "norm"={
            xlab <- "L1 Norm"
-           approx.f <- 1},
+           approx.f <- 1
+           text_hjust <- 0
+         },
          "lambda"={
            xlab <- "Log Lambda"
-           approx.f <- 0},
+           approx.f <- 0
+           text_hjust <- 1
+         },
          "dev"={
            xlab <- "Fraction Deviance Explained"
            approx.f <- 1
+           text_hjust <- 0
          }
   )
   #注意：
@@ -72,7 +77,20 @@ glmplot <- function(fit,xvar,mode,colours=NULL){
       seqnum <- 0.005
     }
   }
-  xbreaks <- seq(min(ggplot_dat$index),max(ggplot_dat$index),seqnum)
+  xvalue <- as.character(round(range(ggplot_dat$index),2))
+  xvalue1 <- xvalue[1]
+  if(xvalue1!="0"){
+    if(as.numeric(substr(xvalue1,nchar(xvalue1),nchar(xvalue1)))<=5){
+      xlimit1 <- as.numeric(gsub(".$","5",xvalue1))
+    }else{
+      xlimit1 <- as.numeric(round(round(as.numeric(xvalue1),1),2))
+    }
+  }else{
+    xlimit1 <- 0
+  }
+  time <- ceiling((max(ggplot_dat$index)-min(ggplot_dat$index))/seqnum)
+  xlimit2 <- xlimit1+time*seqnum
+  xbreaks <- seq(xlimit1,xlimit2,seqnum)
   yvalue <- as.character(round(range(ggplot_dat$Coefficient),2))
   yvalue1 <- yvalue[1];yvalue2 <- yvalue[2]
   if(as.numeric(substr(yvalue1,nchar(yvalue1),nchar(yvalue1)))<=5){
@@ -90,8 +108,9 @@ glmplot <- function(fit,xvar,mode,colours=NULL){
   
   if(mode==1){
     p <- ggplot(data = ggplot_dat,mapping = aes(x=index,y=Coefficient,color=gene))+
-      geom_smooth(size=1.5,method = "loess",se = FALSE)+
-      scale_x_continuous(breaks = xbreaks,
+      geom_smooth(size=1.2,method = "loess",se = FALSE)+
+      scale_x_continuous(limits = c(xlimit1,xlimit2),
+                         breaks = xbreaks,
                          sec.axis = dup_axis(labels =  sec_xlabel),
                          guide = "prism_offset"
       )+
@@ -110,15 +129,19 @@ glmplot <- function(fit,xvar,mode,colours=NULL){
     annotate_x <- rep(a[nrow(a),ncol(a)],ncol(a)-1)
     annotate_y <- a[nrow(a),1:ncol(a)-1]
     annotate_labels <- names(a[nrow(a),1:ncol(a)-1])
-    xbreaks2 <- seq(min(ggplot_dat$index),max(ggplot_dat$index)+seqnum,seqnum)
+    if(text_hjust==0){
+      xbreaks2 <- seq(min(xbreaks),max(xbreaks)+seqnum,seqnum)
+    }else{
+      xbreaks2 <- seq(min(xbreaks)-seqnum,max(xbreaks),seqnum)
+    }
     sec_xlabel2 <- approx(x=index,y=df,xout=xbreaks2,rule=2,method="constant",f=approx.f)$y
     p <- ggplot(data = ggplot_dat,mapping = aes(x=index,y=Coefficient,color=gene))+
-      geom_line(size=1.5)+
+      geom_line(size=1.2)+
       annotate("text",
                x=annotate_x,
                y=annotate_y,
                label=annotate_labels,
-               hjust=0,size=3.5,fontface="bold",
+               hjust=text_hjust,size=3,fontface="bold",
                color=colours
       )+
       scale_x_continuous(limits = c(min(xbreaks2),max(xbreaks2)),
