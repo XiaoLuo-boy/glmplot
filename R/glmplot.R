@@ -123,14 +123,15 @@ glmplot <- function(fit,xvar,mode,colours=NULL){
                hjust=0,size=3.5,fontface="bold",
                color=colours
       )+
-      scale_x_continuous(breaks = xbreaks2,
+      scale_x_continuous(limits = c(min(xbreaks2),max(xbreaks2)),
+                         breaks = xbreaks2,
                          sec.axis = dup_axis(labels =  sec_xlabel2),
                          guide = "prism_offset"
       )+
       scale_y_continuous(limits = c(ylimit1,ylimit2),guide = "prism_offset")+
       theme_classic()+
       theme(legend.position = "none",axis.title.x.top = element_blank())+
-      scale_color_manual(colours = colours)+
+      scale_color_manual(values = colours)+
       xlab(xlab)
   }
   return(p)
