@@ -11,7 +11,7 @@
 #' @export
 #'
 #' @examples
-glmnet.data=function(fit,xvar=c("norm","lambda","dev")){
+glmnet.data=function(fit,norm,xvar=c("norm","lambda","dev")){
   beta <- fit$beta
   lambda <- fit$lambda
   df <- fit$df
