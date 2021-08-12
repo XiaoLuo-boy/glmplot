@@ -1,0 +1,24 @@
+Package: glmplot
+Title: Visualization of Lasso
+Version: 0.0.0.9000
+Authors@R: 
+    person(given = "Baiwei",
+           family = "Luo",
+           role = c("aut", "cre"),
+           email = "2734782653@qq.com")
+Maintainer: Baiwei Luo <2734782653@qq.com>
+Description: Using ggplot2 to plot more elegant figure.
+License: GPL-3
+Encoding: UTF-8
+LazyData: true
+Depends: 
+    ggplot2,
+    ggprism,
+    R (>= 3.6)
+Imports: 
+    stats,
+    tidyr,
+    glmnet
+Suggests: 
+    survival
+RoxygenNote: 7.1.1
