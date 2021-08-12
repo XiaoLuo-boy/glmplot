@@ -25,13 +25,11 @@
 #' data(cliDat)
 #' x <- as.matrix(exprset)
 #' y <- as.matrix(Surv(cliDat[,1],cliDat[,2]))
-#' fit <- glmnet(x,             #\u534F\u53D8\u91CF\u77E9\u9635
-#'               y,             #因变量,注意创建生存对象时time不可以<=0!!!!!!
-#'               family = "cox",  #"gaussian"（高斯）意味y为线性数据（连续）,
-#'               #"binomial"("multinomial"),意味y为二分类变量（多分类变量）
-#'               #"cox"意味y为生存资料，y用Surv构建(包括"time"和"status"两列)
-#'               alpha = 1,       #α=1表示lasso回归，α=0表示岭回归
-#'               nlambda = 1000)   #表示λ值的数量，默认为100，一般而言，但当%Dev值变化不大时，就会停止
+#' fit <- glmnet(x,             
+#'               y,             
+#'               family = "cox",  
+#'               alpha = 1,       
+#'               nlambda = 1000)   
 #' 
 #' glmplot(fit,xvar = "dev",mode = 1,
 #'    colours=c("#3B4992FF","#EE0000FF","#008B45FF","#631879FF","#008280FF","#BB0021FF"))
