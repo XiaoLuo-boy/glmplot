@@ -28,7 +28,7 @@
 #' fit <- glmnet(x,             
 #'               y,             
 #'               family = "cox",  
-#'               alpha = 1,       
+#'               alpha = 1,      
 #'               nlambda = 1000)   
 #' 
 #' glmplot(fit,xvar = "dev",mode = 1,
@@ -42,12 +42,12 @@ glmplot <- function(fit,xvar,mode,colours=NULL){
            xlab <- "L1 Norm"
            approx.f <- 1
            text_hjust <- 0
-         },
+           },
          "lambda"={
            xlab <- "Log Lambda"
            approx.f <- 0
            text_hjust <- 1
-         },
+           },
          "dev"={
            xlab <- "Fraction Deviance Explained"
            approx.f <- 1

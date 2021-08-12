@@ -4,10 +4,12 @@
 \alias{glmnet.data}
 \title{To Acquire The Glmnet Data for Visualization}
 \usage{
-glmnet.data(fit, xvar = c("norm", "lambda", "dev"))
+glmnet.data(fit, norm, xvar = c("norm", "lambda", "dev"))
 }
 \arguments{
 \item{fit}{The result of \link{glmnet}.}
+
+\item{norm}{Formal parameter, make no sense.}
 
 \item{xvar}{Observation type, which will be x-axis mapping.
 You can choose "norm","lambda" or "dev".}

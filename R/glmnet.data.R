@@ -4,6 +4,7 @@
 #'     to customize the drawing.
 #'
 #' @param fit The result of \link{glmnet}.
+#' @param norm Formal parameter, make no sense.
 #' @param xvar Observation type, which will be x-axis mapping.
 #'     You can choose "norm","lambda" or "dev".
 #' @import glmnet

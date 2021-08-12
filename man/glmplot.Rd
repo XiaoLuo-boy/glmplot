@@ -32,13 +32,11 @@ data(exprset)
 data(cliDat)
 x <- as.matrix(exprset)
 y <- as.matrix(Surv(cliDat[,1],cliDat[,2]))
-fit <- glmnet(x,             #鍗忓彉閲忕煩闃戼㸵
-              y,             #鍥犲彉閲㠼㹦,娉ㄦ剰鍒涘缓鐢熷瓨瀵硅薄鏃秚ime涓嶅彲浠愼㸵<=0!!!!!!
-              family = "cox",  #"gaussian"锛堥珮鏂級鎰忓懗y涓虹嚎鎬ф暟鎹紙杩炵画锛㠼㸹,
-              #"binomial"("multinomial"),鎰忓懗y涓轰簩鍒嗙被鍙橀噺锛堝鍒嗙被鍙橀噺锛㠼㸹
-              #"cox"鎰忓懗y涓虹敓瀛樿祫鏂欙紝y鐢⊿urv鏋勫缓(鍖呮嫭"time"鍜㠼㹣"status"涓ゅ垪)
-              alpha = 1,       #伪=1琛ㄧずlasso鍥炲綊锛屛戼㸱=0琛ㄧず宀洖褰㤼㸲
-              nlambda = 1000)   #琛ㄧず位鍊肩殑鏁伴噺锛岄粯璁や负100锛屼竴鑸€岃█锛屼絾褰揬%Dev鍊煎彉鍖栦笉澶ф椂锛屽氨浼氬仠姝愼㸲
+fit <- glmnet(x,             
+              y,             
+              family = "cox",  
+              alpha = 1,      
+              nlambda = 1000)   
 
 glmplot(fit,xvar = "dev",mode = 1,
    colours=c("#3B4992FF","#EE0000FF","#008B45FF","#631879FF","#008280FF","#BB0021FF"))
