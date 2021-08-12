@@ -25,7 +25,7 @@
 #' data(cliDat)
 #' x <- as.matrix(exprset)
 #' y <- as.matrix(Surv(cliDat[,1],cliDat[,2]))
-#' fit <- glmnet(x,             #协变量矩阵
+#' fit <- glmnet(x,             #\u534F\u53D8\u91CF\u77E9\u9635
 #'               y,             #因变量,注意创建生存对象时time不可以<=0!!!!!!
 #'               family = "cox",  #"gaussian"（高斯）意味y为线性数据（连续）,
 #'               #"binomial"("multinomial"),意味y为二分类变量（多分类变量）
